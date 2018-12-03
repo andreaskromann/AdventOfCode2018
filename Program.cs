@@ -30,15 +30,16 @@ namespace AdventOfCode2018
 
             var problem = types[number];
             
+            var instance = (ICodingProblem)Activator.CreateInstance(problem);
+            
             try
             {
-                var sw = new Stopwatch();
-                sw.Start();
-
-                var instance = (ICodingProblem)Activator.CreateInstance(problem);
+                var sw = Stopwatch.StartNew();
+                
                 instance.Run();
 
                 sw.Stop();
+                
                 Console.WriteLine();
                 Console.WriteLine("Elapsed = {0}ms", sw.ElapsedMilliseconds);
             }
