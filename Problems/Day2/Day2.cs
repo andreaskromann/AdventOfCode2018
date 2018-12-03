@@ -15,7 +15,7 @@ namespace AdventOfCode2018.Problems
         
         private static void Part1()
         {
-            var data = File.ReadAllLines("Problems\\Day2.data").ToArray();
+            var data = File.ReadAllLines("Problems\\Day2\\Day2.data").ToArray();
 
             var checksum = data.Aggregate(
                 (0, 0),
@@ -48,7 +48,7 @@ namespace AdventOfCode2018.Problems
 
         private static void Part2()
         {
-            var data = File.ReadAllLines("Problems\\Day2.data").ToArray();
+            var data = File.ReadAllLines("Problems\\Day2\\Day2.data").ToArray();
 
             (int,int) CalculateDistance(string x, string y)
             {

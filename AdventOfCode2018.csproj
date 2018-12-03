@@ -6,16 +6,4 @@
         <LangVersion>7</LangVersion>
     </PropertyGroup>
 
-    <ItemGroup>
-      <None Update="Problems\Day1.data">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Problems\Day2.data">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Problems\Day2.testdata">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>
