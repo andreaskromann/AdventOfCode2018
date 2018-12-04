@@ -22,23 +22,22 @@ namespace AdventOfCode2018.Problems.Day4
 
                 switch (action)
                 {
-                        case "Guard":
-                            currentGuardId = int.Parse(match.Groups["id"].Value);
-                            break;
-                        case "falls":
-                            startSleep = minute;
-                            break;
-                        case "wakes":
-                            if (!sleepMap.ContainsKey(currentGuardId))
-                                sleepMap[currentGuardId] = new Dictionary<int, int>();
-                            for (var i = startSleep; i < minute; i++)
-                            {
-                                if (!sleepMap[currentGuardId].ContainsKey(i))
-                                    sleepMap[currentGuardId][i] = 0;
-                                sleepMap[currentGuardId][i] += 1;
-                            }
-
-                            break;
+                    case "Guard":
+                        currentGuardId = int.Parse(match.Groups["id"].Value);
+                        break;
+                    case "falls":
+                        startSleep = minute;
+                        break;
+                    case "wakes":
+                        if (!sleepMap.ContainsKey(currentGuardId))
+                            sleepMap[currentGuardId] = new Dictionary<int, int>();
+                        for (var i = startSleep; i < minute; i++)
+                        {
+                            if (!sleepMap[currentGuardId].ContainsKey(i))
+                                sleepMap[currentGuardId][i] = 0;
+                            sleepMap[currentGuardId][i] += 1;
+                        }
+                        break;
                 }
             }
 
@@ -48,22 +47,28 @@ namespace AdventOfCode2018.Problems.Day4
                 ParseInput(line);
 
             var maxSleep = (Id : 0, TotalSleep: 0, MaxMinute: 0);
-            foreach (var sleep in sleepMap)
+            var mostFrequent = (Id : 0, Max: 0 , MaxMinute: 0);
+            
+            foreach (var guard in sleepMap)
             {
-                var temp = sleep.Value.Sum(x => x.Value);
-                if (temp > maxSleep.TotalSleep)
+                var guardTotal = guard.Value.Sum(x => x.Value);
+                var maxMinute = (Minute: -1, Max:0);
+                
+                foreach (var kv in guard.Value)
                 {
-                    var maxMinute = (Minute: -1, Max:0);
-                    foreach (var kv in sleep.Value)
-                    {
-                        if (kv.Value > maxMinute.Max)
-                            maxMinute = (kv.Key, kv.Value);
-                    }
-                    maxSleep = (sleep.Key, temp, maxMinute.Minute);
+                    if (kv.Value > maxMinute.Max)
+                        maxMinute = (kv.Key, kv.Value);
                 }
+                
+                if (guardTotal > maxSleep.TotalSleep)
+                    maxSleep = (guard.Key, guardTotal, maxMinute.Minute);
+                
+                if (maxMinute.Max > mostFrequent.Max)
+                    mostFrequent = (guard.Key, maxMinute.Max, maxMinute.Minute);
             }
             
             Console.WriteLine($"Part 1: {maxSleep.Id * maxSleep.MaxMinute}");
+            Console.WriteLine($"Part 2: {mostFrequent.Id * mostFrequent.MaxMinute}");
         }
     }
 }
