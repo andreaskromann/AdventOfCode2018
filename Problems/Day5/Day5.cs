@@ -38,13 +38,13 @@ namespace AdventOfCode2018.Problems.Day5
                 return sb.ToString();
             }
 
-            var result = React(data);
-            Console.WriteLine($"Part 1: {result.Length}");
+            var initialReaction = React(data);
+            Console.WriteLine($"Part 1: {initialReaction.Length}");
 
             var min = int.MaxValue;
             for (var c = 65; c <= 90; c++)
             {
-                var temp = React(result, c);
+                var temp = React(initialReaction, c);
                 if (temp.Length < min)
                     min = temp.Length;
             }
