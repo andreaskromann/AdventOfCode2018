@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using static System.Math;
 
 namespace AdventOfCode2018.Problems.Day5
@@ -10,32 +11,38 @@ namespace AdventOfCode2018.Problems.Day5
         {
             var data = File.ReadAllLines("Problems\\Day5\\Day5.data")[0];
 
-            string React(string polymer)
+            int React(string polymer, int? remove = null)
             {
-                for (var i = 0; i < polymer.Length-1;)
+                var indexes = Enumerable.Range(0, polymer.Length).ToList();
+                
+                for (var i = 0; i < indexes.Count-1;)
                 {
-                    if (Abs(polymer[i] - polymer[i + 1]) == 32) // |'a' - 'A'| == 32
+                    if (remove.HasValue && (remove == polymer[indexes[i]] || (remove + 32) == polymer[indexes[i]]))
                     {
-                        polymer = polymer.Remove(i, 2);
+                        indexes.RemoveAt(i);
+                        i = Max(0, i - 1);
+                    }
+                    else if (Abs(polymer[indexes[i]] - polymer[indexes[i + 1]]) == 32) // |'a' - 'A'| == 32
+                    {
+                        indexes.RemoveRange(i, 2);
                         i = Max(0, i - 1);
                     }
                     else
                         i++;
                 }
 
-                return polymer;
+                return indexes.Count;
             }
 
             var result = React(data);
-            Console.WriteLine($"Part 1: {result.Length}");
+            Console.WriteLine($"Part 1: {result}");
 
             var min = int.MaxValue;
             for (var c = 65; c <= 90; c++)
             {
-                var temp = data.Replace(((char) c).ToString(), "", StringComparison.OrdinalIgnoreCase);
-                temp = React(temp);
-                if (temp.Length < min)
-                    min = temp.Length;
+                var temp = React(data, c);
+                if (temp < min)
+                    min = temp;
             }
             Console.WriteLine($"Part 2: {min}");
         }
