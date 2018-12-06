@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using static System.Math;
 
 namespace AdventOfCode2018.Problems.Day5
@@ -11,7 +12,7 @@ namespace AdventOfCode2018.Problems.Day5
         {
             var data = File.ReadAllLines("Problems\\Day5\\Day5.data")[0];
 
-            int React(string polymer, int? remove = null)
+            string React(string polymer, int? remove = null)
             {
                 var indexes = Enumerable.Range(0, polymer.Length).ToList();
                 
@@ -31,18 +32,21 @@ namespace AdventOfCode2018.Problems.Day5
                         i++;
                 }
 
-                return indexes.Count;
+                var sb = new StringBuilder(indexes.Count);
+                foreach (var index in indexes)
+                    sb.Append(polymer[index]);
+                return sb.ToString();
             }
 
             var result = React(data);
-            Console.WriteLine($"Part 1: {result}");
+            Console.WriteLine($"Part 1: {result.Length}");
 
             var min = int.MaxValue;
             for (var c = 65; c <= 90; c++)
             {
-                var temp = React(data, c);
-                if (temp < min)
-                    min = temp;
+                var temp = React(result, c);
+                if (temp.Length < min)
+                    min = temp.Length;
             }
             Console.WriteLine($"Part 2: {min}");
         }
