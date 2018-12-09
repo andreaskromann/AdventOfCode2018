@@ -56,9 +56,9 @@ namespace AdventOfCode2018.Problems.Day9
                 }
                 else
                 {
-                    var placeInFrontOf = ClockWise(currentMarble, 1);
+                    var addAfterThis = ClockWise(currentMarble, 1);
                     var newNode = new LinkedListNode<int>(marble);
-                    circle.AddAfter(placeInFrontOf, newNode);
+                    circle.AddAfter(addAfterThis, newNode);
                     currentMarble = newNode;
                 }
 
