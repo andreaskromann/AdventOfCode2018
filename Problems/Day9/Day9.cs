@@ -26,7 +26,6 @@ namespace AdventOfCode2018.Problems.Day9
                     else
                         current = current.Previous;
                 }
-
                 return current;
             }
             
@@ -39,7 +38,6 @@ namespace AdventOfCode2018.Problems.Day9
                     else
                         current = current.Next;
                 }
-
                 return current;
             }
             
@@ -65,7 +63,7 @@ namespace AdventOfCode2018.Problems.Day9
                 currentPlayer = (currentPlayer + 1) % numberOfPlayers;
             }
             
-            Console.WriteLine($"Part 1: {playerScores.Max()}");
+            Console.WriteLine($"Part 1/2: {playerScores.Max()}");
         }
     }
 }
