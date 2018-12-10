@@ -9,7 +9,7 @@ namespace AdventOfCode2018.Problems
     {
         public void Run()
         {
-            var data = File.ReadAllLines("Problems\\Day1\\Day1.data").Select(int.Parse).ToArray();
+            var data = File.ReadAllLines("Problems\\Day01\\Day1.data").Select(int.Parse).ToArray();
             
             var part1 = data.Sum();
             Console.WriteLine($"Part 1: {part1}");

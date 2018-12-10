@@ -10,7 +10,7 @@ namespace AdventOfCode2018.Problems.Day5
     {
         public void Run()
         {
-            var data = File.ReadAllLines("Problems\\Day5\\Day5.data")[0];
+            var data = File.ReadAllLines("Problems\\Day05\\Day5.data")[0];
 
             string React(string polymer, int? remove = null)
             {

@@ -61,7 +61,7 @@ namespace AdventOfCode2018.Problems.Day3
                 return new Square(match.Groups["id"].Value, topLeft, bottomRight);
             }
             
-            var data = File.ReadAllLines("Problems\\Day3\\Day3.data").Select(ParseSquare).ToArray();
+            var data = File.ReadAllLines("Problems\\Day03\\Day3.data").Select(ParseSquare).ToArray();
 
             var result = counts.Count(kv => kv.Value >= 2); 
             Console.WriteLine($"Part 1: {result}");

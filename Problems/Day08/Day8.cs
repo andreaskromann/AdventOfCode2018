@@ -34,7 +34,7 @@ namespace AdventOfCode2018.Problems.Day8
         
         public void Run()
         {
-            var data = File.ReadAllLines("Problems\\Day8\\Day8.data")[0]
+            var data = File.ReadAllLines("Problems\\Day08\\Day8.data")[0]
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();

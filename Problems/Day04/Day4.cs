@@ -41,7 +41,7 @@ namespace AdventOfCode2018.Problems.Day4
                 }
             }
 
-            var data = File.ReadAllLines("Problems\\Day4\\Day4.data");
+            var data = File.ReadAllLines("Problems\\Day04\\Day4.data");
             Array.Sort(data);
             foreach (var line in data)
                 ParseInput(line);

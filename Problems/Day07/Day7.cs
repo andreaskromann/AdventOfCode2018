@@ -59,7 +59,7 @@ namespace AdventOfCode2018.Problems.Day7
                 return new Edge(@from, to);
             }
             
-            var data = File.ReadAllLines("Problems\\Day7\\Day7.data")
+            var data = File.ReadAllLines("Problems\\Day07\\Day7.data")
                 .Select(ParseInput)
                 .ToList();
 

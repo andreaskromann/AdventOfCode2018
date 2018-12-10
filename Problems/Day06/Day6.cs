@@ -24,7 +24,7 @@ namespace AdventOfCode2018.Problems.Day6
         
         public void Run()
         {
-            var data = File.ReadAllLines("Problems\\Day6\\Day6.data")
+            var data = File.ReadAllLines("Problems\\Day06\\Day6.data")
                 .Select(l => l.Split(','))
                 .Select((a,i) => new Point(i, int.Parse(a[0].Trim()), int.Parse(a[1].Trim())))
                 .ToArray();

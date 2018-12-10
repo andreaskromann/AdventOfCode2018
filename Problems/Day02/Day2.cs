@@ -15,7 +15,7 @@ namespace AdventOfCode2018.Problems
         
         private static void Part1()
         {
-            var data = File.ReadAllLines("Problems\\Day2\\Day2.data").ToArray();
+            var data = File.ReadAllLines("Problems\\Day02\\Day2.data").ToArray();
 
             var checksum = data.Aggregate(
                 (0, 0),
