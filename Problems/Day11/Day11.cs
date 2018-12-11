@@ -1,9 +1,12 @@
 using System;
+using System.Threading.Tasks;
 
 namespace AdventOfCode2018.Problems.Day11
 {
     public class Day11 : ICodingProblem
     {
+        private static object _lockObj = new object();
+        
         public void Run()
         {
             const int serialNumber = 1309;
@@ -58,23 +61,35 @@ namespace AdventOfCode2018.Problems.Day11
             }
             
             var max2 = (Level: int.MinValue, X: -1, Y: -1, Size: -1);
-            for (var x = 0; x < gridSize; x++)
-            {
-                for (var y = 0; y < gridSize; y++)
+            Parallel.For(0, gridSize, 
+                () => (Level: int.MinValue, X: -1, Y: -1, Size: -1),
+                (x,state,localMax) =>
                 {
-                    var currentSum = grid[x,y];
-                    
-                    if (currentSum > max2.Level)
-                        max2 = (currentSum, x+1, y+1, 1);
-
-                    for (var size = 2; y + size - 1 < gridSize && x + size - 1 < gridSize; size++)
+                    for (var y = 0; y < gridSize; y++)
                     {
-                        currentSum = SumSquare(x, y, size, currentSum);
+                        var currentSum = grid[x, y];
+    
                         if (currentSum > max2.Level)
-                            max2 = (currentSum, x+1, y+1, size);
+                            max2 = (currentSum, x + 1, y + 1, 1);
+    
+                        for (var size = 2; y + size - 1 < gridSize && x + size - 1 < gridSize; size++)
+                        {
+                            currentSum = SumSquare(x, y, size, currentSum);
+                            if (currentSum > localMax.Level)
+                                localMax = (currentSum, x + 1, y + 1, size);
+                        }
                     }
-                }
-            }
+    
+                    return localMax;
+                },
+                localMax =>
+                {
+                    lock (_lockObj)
+                    {
+                        if (localMax.Level > max2.Level)
+                            max2 = localMax;
+                    }
+                });
             
             Console.WriteLine($"Part 2: {max2}");
         }
