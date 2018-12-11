@@ -7,11 +7,12 @@ namespace AdventOfCode2018.Problems.Day11
         public void Run()
         {
             const int serialNumber = 1309;
+            const int gridSize = 300;
 
-            var grid = new int[300, 300];
-            for (var x = 0; x < 300; x++)
+            var grid = new int[gridSize, gridSize];
+            for (var x = 0; x < gridSize; x++)
             {
-                for (var y = 0; y < 300; y++)
+                for (var y = 0; y < gridSize; y++)
                 {
                     var number = ((x + 1 + 10) * ((x + 1 + 10) * (y + 1) + serialNumber));
                     var formatted = number.ToString("000");
@@ -21,9 +22,9 @@ namespace AdventOfCode2018.Problems.Day11
             }
 
             var max = (Level: int.MinValue, X: -1, Y: -1);
-            for (var x = 0; x < 300 - 2; x++)
+            for (var x = 0; x < gridSize - 2; x++)
             {
-                for (var y = 0; y < 300 - 2; y++)
+                for (var y = 0; y < gridSize - 2; y++)
                 {
                     var square = 0;
                     for (var i = 0; i < 3; i++)
@@ -57,20 +58,20 @@ namespace AdventOfCode2018.Problems.Day11
             }
             
             var max2 = (Level: int.MinValue, X: -1, Y: -1, Size: -1);
-            for (var x = 0; x < 300; x++)
+            for (var x = 0; x < gridSize; x++)
             {
-                for (var y = 0; y < 300; y++)
+                for (var y = 0; y < gridSize; y++)
                 {
-                    var square = grid[x,y];
+                    var currentSum = grid[x,y];
                     
-                    if (square > max2.Level)
-                        max2 = (square, x+1, y+1, 1);
+                    if (currentSum > max2.Level)
+                        max2 = (currentSum, x+1, y+1, 1);
 
-                    for (var i = 2; y + i - 1 < 300 && x + i - 1 < 300; i++)
+                    for (var size = 2; y + size - 1 < gridSize && x + size - 1 < gridSize; size++)
                     {
-                        square = SumSquare(x, y, i, square);
-                        if (square > max2.Level)
-                            max2 = (square, x+1, y+1, i);
+                        currentSum = SumSquare(x, y, size, currentSum);
+                        if (currentSum > max2.Level)
+                            max2 = (currentSum, x+1, y+1, size);
                     }
                 }
             }
