@@ -69,8 +69,8 @@ namespace AdventOfCode2018.Problems.Day11
                     {
                         var currentSum = grid[x, y];
     
-                        if (currentSum > max2.Level)
-                            max2 = (currentSum, x + 1, y + 1, 1);
+                        if (currentSum > localMax.Level)
+                            localMax = (currentSum, x + 1, y + 1, 1);
     
                         for (var size = 2; y + size - 1 < gridSize && x + size - 1 < gridSize; size++)
                         {
