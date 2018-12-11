@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 
 namespace AdventOfCode2018.Problems.Day11
 {
